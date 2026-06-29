@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Octavianus Santoso — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:      #0f1117;
+    --ink-mid:  #3a3d4a;
+    --ink-soft: #6b6f80;
+    --paper:    #f7f6f2;
+    --white:    #ffffff;
+    --teal:     #1a8c74;
+    --teal-lt:  #e6f4f1;
+    --amber:    #c8680a;
+    --amber-lt: #fdf0e3;
+    --rule:     #e2e0d8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,246,242,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px;
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500;
+    color: var(--ink); text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--ink-soft);
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 100px 80px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -120px; right: -120px;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,140,116,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 500;
+    color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.04;
+    color: var(--ink);
+    max-width: 840px;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-desc {
+    max-width: 520px;
+    color: var(--ink-mid);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    margin-top: 8px;
+  }
+  .hero-stat { display: flex; flex-direction: column; gap: 4px; }
+  .hero-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; color: var(--ink);
+  }
+  .hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  .section {
+    padding: 96px 80px;
+    border-top: 1px solid var(--rule);
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 64px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--teal);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    min-width: 32px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px; color: var(--ink);
+  }
+
+  /* ─── ABOUT ─── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+  .about-text p { color: var(--ink-mid); margin-bottom: 20px; line-height: 1.8; }
+  .about-skills { display: flex; flex-direction: column; gap: 16px; }
+  .skill-row { display: flex; flex-direction: column; gap: 6px; }
+  .skill-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    font-size: 12px; font-weight: 500; color: var(--ink-mid);
+  }
+  .tag.green { background: var(--teal-lt); border-color: rgba(26,140,116,0.25); color: var(--teal); }
+  .tag.amber { background: var(--amber-lt); border-color: rgba(200,104,10,0.25); color: var(--amber); }
+
+  /* ─── PROJECT CARDS ─── */
+  .projects-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow .25s;
+  }
+  .project-card:hover { box-shadow: 0 8px 40px rgba(15,17,23,0.08); }
+
+  .project-header {
+    padding: 40px 48px 32px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+  }
+  .project-kicker {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px;
+  }
+  .project-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .badge-teal { background: var(--teal-lt); color: var(--teal); }
+  .badge-amber { background: var(--amber-lt); color: var(--amber); }
+  .project-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px; line-height: 1.2;
+    color: var(--ink); margin-bottom: 12px;
+  }
+  .project-subtitle { font-size: 14px; color: var(--ink-soft); }
+
+  .expand-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0; margin-top: 4px;
+    transition: all .2s;
+    color: var(--ink-mid); font-size: 18px; line-height: 1;
+    font-family: monospace;
+  }
+  .project-card.open .expand-btn { background: var(--teal); border-color: var(--teal); color: white; transform: rotate(45deg); }
+
+  .project-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1);
+  }
+  .project-card.open .project-body { max-height: 9999px; }
+  .project-body-inner { padding: 0 48px 48px; border-top: 1px solid var(--rule); }
+
+  .project-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--teal);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin: 32px 0 16px;
+  }
+
+  .feature-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px; margin-bottom: 8px;
+  }
+  .feature-item {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .feature-item h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .feature-item p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .flow-steps { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: flex; gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--teal);
+    min-width: 24px; padding-top: 3px;
+    font-weight: 500;
+  }
+  .flow-step-content h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .flow-step-content p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+  .metrics-row {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 24px 28px;
+  }
+  .metric { display: flex; flex-direction: column; gap: 4px; }
+  .metric-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px; color: var(--ink);
+  }
+  .metric-val.green { color: var(--teal); }
+  .metric-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  .workflow-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .workflow-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 13px; color: var(--ink-mid); line-height: 1.65;
+  }
+  .workflow-list li::before {
+    content: '→';
+    color: var(--teal); font-weight: 600; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 56px 80px;
+    border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-left { display: flex; flex-direction: column; gap: 6px; }
+  .footer-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; color: var(--ink);
+  }
+  .footer-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.08em; }
+  .footer-right { font-size: 12px; color: var(--ink-soft); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 18px; }
+    .hero { padding: 90px 24px 64px; }
+    .section { padding: 64px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .project-header { padding: 28px 24px 22px; grid-template-columns: 1fr; }
+    .project-body-inner { padding: 0 24px 36px; }
+    .expand-btn { display: none; }
+    footer { padding: 40px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-body { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">kevin.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#projects">Proyek</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Software Developer &amp; ML Engineer</p>
+  <h1>Kevin Octavianus<br><em>Santoso</em></h1>
+  <p class="hero-desc">
+    Membangun sistem manajemen inventori yang terintegrasi dan aplikasi machine learning berbasis web — dari Purchase Order hingga deteksi penyakit daun padi dengan akurasi 92%.
+  </p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="hero-stat-num">8+</span>
+      <span class="hero-stat-label">Modul Dibangun</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">92.4%</span>
+      <span class="hero-stat-label">Akurasi Model ML</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">2</span>
+      <span class="hero-stat-label">Proyek Besar</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">2026</span>
+      <span class="hero-stat-label">Tahun Aktif</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-header">
+    <span class="section-num">—</span>
+    <h2 class="section-title">Tentang Saya</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Saya adalah mahasiswa Informatika di Universitas Bunda Mulia Tangerang, berfokus pada pengembangan sistem web full-stack dan penerapan machine learning untuk permasalahan nyata.</p>
+      <p>Di PT. Javinci Berkat Kreatif Sentosa, saya merancang dan membangun sistem Inventory Management yang mencakup lebih dari 8 modul — dari laporan stok hingga manajemen produksi berbasis SPK yang terintegrasi penuh.</p>
+      <p>Pada proyek skripsi, saya mengembangkan sistem klasifikasi penyakit daun padi berbasis web menggunakan algoritma Random Forest dengan ekstraksi fitur GLCM, Color, dan LBP — mencapai akurasi 92.4% pada 4 kelas penyakit.</p>
+    </div>
+    <div class="about-skills">
+      <div class="skill-row">
+        <span class="skill-label">Backend</span>
+        <div class="skill-tags">
+          <span class="tag green">PHP / Laravel</span>
+          <span class="tag green">Python Django</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Frontend</span>
+        <div class="skill-tags">
+          <span class="tag">HTML / CSS / JS</span>
+          <span class="tag">Bootstrap 5</span>
+          <span class="tag">Ajax Autocomplete</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Machine Learning</span>
+        <div class="skill-tags">
+          <span class="tag amber">Random Forest</span>
+          <span class="tag amber">scikit-learn</span>
+          <span class="tag amber">SMOTE / BorderlineSMOTE</span>
+          <span class="tag amber">OpenCV</span>
+          <span class="tag amber">GLCM · LBP · Color Features</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Pendidikan</span>
+        <div class="skill-tags">
+          <span class="tag">Universitas Bunda Mulia</span>
+          <span class="tag">S1 Informatika · 2026</span>
+          <span class="tag">NIM 32220098</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <span class="section-num">—</span>
+    <h2 class="section-title">Proyek</h2>
+  </div>
+
+  <div class="projects-list">
+
+    <!-- PROJECT 1 -->
+    <div class="project-card" id="card1">
+      <div class="project-header" onclick="toggleCard('card1')">
+        <div>
+          <div class="project-kicker">
+            <span class="project-badge badge-teal">Inventory Management System</span>
+            <span class="project-year">2025 – 2026</span>
+          </div>
+          <h3 class="project-title">Javinci Inventory Management<br>— PT. Javinci Berkat Kreatif Sentosa</h3>
+          <p class="project-subtitle">Sistem ERP inventori end-to-end: dari Purchase Order hingga produksi dengan Bill of Material dan SPK.</p>
+        </div>
+        <button class="expand-btn" aria-label="Toggle detail">+</button>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+
+          <p class="project-section-label">Gambaran Sistem</p>
+          <p style="color:var(--ink-mid);font-size:14px;line-height:1.8;max-width:720px;">
+            Saya merancang dan mengimplementasikan delapan modul terintegrasi pada platform web Javinci Inventory Management — sebuah sistem manajemen inventori yang digunakan secara aktif di gudang dan divisi produksi perusahaan kosmetik ini.
+          </p>
+
+          <p class="project-section-label">Modul yang Dikembangkan</p>
+          <div class="feature-grid">
+            <div class="feature-item">
+              <h4>1. Laporan Stok Min/Max</h4>
+              <p>Filter per gudang dan tipe laporan (MIN, MAX, Semua). Export ke Excel dan Print Report.</p>
+            </div>
+            <div class="feature-item">
+              <h4>2. Laporan Summary Mutasi Barang</h4>
+              <p>Rekap pengiriman antar gudang dengan filter status: Gantung, Selesai, Batal, Semua Status.</p>
+            </div>
+            <div class="feature-item">
+              <h4>3. QC Bahan Baku (CRUD)</h4>
+              <p>Manajemen Quality Control lengkap: Create, Detail, Edit, Approve, dan Batalkan QC dengan konfirmasi modal.</p>
+            </div>
+            <div class="feature-item">
+              <h4>4. Upload PDF Resi</h4>
+              <p>Sistem baca nomor resi otomatis dari PDF untuk mencegah double print. Deteksi duplikat, tracking user &amp; timestamp.</p>
+            </div>
+            <div class="feature-item">
+              <h4>5. Purchase Order (CRUD)</h4>
+              <p>Pembuatan PO dengan kalkulasi otomatis Sub Total, Tax, dan Grand Total. Status: Open → Approved → Completed.</p>
+            </div>
+            <div class="feature-item">
+              <h4>6. Laporan PO Detail</h4>
+              <p>Filter tiga dimensi: Status PO × Supplier × Gudang. Menampilkan progress penerimaan per item dengan persentase.</p>
+            </div>
+            <div class="feature-item">
+              <h4>7. Bill of Material (CRUD)</h4>
+              <p>Manajemen BOM untuk tipe Ingredient dan Filling &amp; Packaging. Digunakan sebagai acuan otomatis pada SPK.</p>
+            </div>
+            <div class="feature-item">
+              <h4>8. Surat Perintah Kerja (SPK)</h4>
+              <p>Alur produksi lengkap: Draft → Approved → In Progress → Completed. BOM terisi otomatis saat memilih barang setengah jadi.</p>
+            </div>
+          </div>
+
+          <p class="project-section-label">Alur Purchase Order → Penerimaan Barang</p>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="flow-step-num">01</span>
+              <div class="flow-step-content">
+                <h4>Buat Purchase Order</h4>
+                <p>Input nomor PO, supplier, gudang tujuan, dan item barang via Ajax autocomplete. Grand Total dihitung otomatis termasuk pajak.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">02</span>
+              <div class="flow-step-content">
+                <h4>Approve PO</h4>
+                <p>Manajemen mengonfirmasi PO. Status berubah menjadi Completed dan tidak dapat diubah kembali.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">03</span>
+              <div class="flow-step-content">
+                <h4>Penerimaan Barang Otomatis</h4>
+                <p>Saat membuat penerimaan barang, user cukup memilih nomor PO — form Supplier, Gudang, dan detail item terisi otomatis.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">04</span>
+              <div class="flow-step-content">
+                <h4>Laporan Progress</h4>
+                <p>Laporan PO Detail menampilkan persentase progress penerimaan per item dan per PO secara real-time.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="project-section-label">Alur Produksi SPK</p>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="flow-step-num">01</span>
+              <div class="flow-step-content">
+                <h4>Draft SPK</h4>
+                <p>User membuat SPK, memilih barang setengah jadi dan barang jadi. Daftar bahan baku dan bahan pengemas terisi otomatis dari BOM.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">02</span>
+              <div class="flow-step-content">
+                <h4>Approve SPK</h4>
+                <p>SPK dikunci dan tidak dapat diedit. Sistem menampilkan tabel Material Kurang (shortage) jika stok tidak mencukupi.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">03</span>
+              <div class="flow-step-content">
+                <h4>Start Production</h4>
+                <p>Status berubah ke In Progress. Material dikonsumsi dari inventory secara otomatis oleh sistem.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">04</span>
+              <div class="flow-step-content">
+                <h4>Complete Production</h4>
+                <p>Produksi selesai. Barang jadi masuk ke inventory. SPK tidak dapat diubah lagi.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="project-section-label">Teknologi</p>
+          <div class="tech-stack">
+            <span class="tag green">PHP</span>
+            <span class="tag green">Laravel / MVC</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Ajax Autocomplete</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">Export Excel</span>
+            <span class="tag">Print Report</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card" id="card2" style="margin-top:16px;">
+      <div class="project-header" onclick="toggleCard('card2')">
+        <div>
+          <div class="project-kicker">
+            <span class="project-badge badge-amber">Machine Learning · Skripsi</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3 class="project-title">Rice Disease Classifier<br>— Deteksi Penyakit Daun Padi</h3>
+          <p class="project-subtitle">Aplikasi web berbasis Django untuk klasifikasi penyakit daun padi menggunakan Random Forest + GLCM + LBP + Color features, akurasi 92.4%.</p>
+        </div>
+        <button class="expand-btn" aria-label="Toggle detail">+</button>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+
+          <p class="project-section-label">Gambaran Sistem</p>
+          <p style="color:var(--ink-mid);font-size:14px;line-height:1.8;max-width:720px;">
+            Sistem klasifikasi penyakit daun padi berbasis web yang memungkinkan petani dan penyuluh pertanian mengidentifikasi jenis penyakit hanya dengan mengunggah foto daun padi. Model dilatih dengan algoritma Random Forest menggunakan 92 fitur gabungan (GLCM + Color + LBP) dan teknik oversampling BorderlineSMOTE.
+          </p>
+
+          <p class="project-section-label">Metrik Performa Model</p>
+          <div class="metrics-row">
+            <div class="metric">
+              <span class="metric-val green">92.4%</span>
+              <span class="metric-label">Akurasi Keseluruhan</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val green">92.5%</span>
+              <span class="metric-label">Precision</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val green">92.4%</span>
+              <span class="metric-label">Recall</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val green">92.4%</span>
+              <span class="metric-label">F1-Score</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">96.5%</span>
+              <span class="metric-label">Best CV Score</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">8,678</span>
+              <span class="metric-label">Total Sampel</span>
+            </div>
+          </div>
+
+          <p class="project-section-label">Kelas Penyakit yang Terdeteksi</p>
+          <div class="feature-grid">
+            <div class="feature-item">
+              <h4>🌾 Bacterial Leaf Blight</h4>
+              <p>Penyakit bakteri oleh Xanthomonas oryzae. Presisi 94.92%, Recall 96.76%, F1 95.83%.</p>
+            </div>
+            <div class="feature-item">
+              <h4>🌿 Rice Blast</h4>
+              <p>Jamur Pyricularia oryzae. Presisi 93.08%, Recall 82.22%, F1 84.57%.</p>
+            </div>
+            <div class="feature-item">
+              <h4>🍂 Tungro</h4>
+              <p>Penyakit virus Rice Tungro. Presisi 94.57%, Recall 92.55%, F1 93.55%.</p>
+            </div>
+            <div class="feature-item">
+              <h4>✅ Healthy (Sehat)</h4>
+              <p>Daun padi normal tanpa gejala penyakit. Presisi 81.0%, Recall 87.1%, F1 83.94%.</p>
+            </div>
+          </div>
+
+          <p class="project-section-label">Pipeline Ekstraksi Fitur (92 Fitur Total)</p>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="flow-step-num">GLCM</span>
+              <div class="flow-step-content">
+                <h4>24 Fitur Tekstur (Gray-Level Co-occurrence Matrix)</h4>
+                <p>Contrast, Dissimilarity, Homogeneity, Energy, Correlation, ASM — masing-masing pada 4 sudut (0°, 45°, 90°, 135°).</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">Color</span>
+              <div class="flow-step-content">
+                <h4>39 Fitur Warna (HSV + LAB + Histogram BGR)</h4>
+                <p>HSV 9 fitur, LAB 6 fitur, Histogram 8-bin per channel BGR (24 fitur) — efektif membedakan warna kuning, coklat, hijau pada setiap penyakit.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">LBP</span>
+              <div class="flow-step-content">
+                <h4>29 Fitur Pola Lokal (Local Binary Pattern)</h4>
+                <p>Histogram LBP 26 bin + Mean, Std, Entropy — menangkap pola tekstur lokal pada bercak penyakit.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="project-section-label">Fitur Unggulan Aplikasi</p>
+          <ul class="workflow-list">
+            <li>Validasi gambar berlapis — sistem otomatis menolak gambar yang bukan daun padi (poster, hewan, dokumen) menggunakan analisis warna HSV, MSER, dan bentuk kontur.</li>
+            <li>Upload foto atau ambil gambar langsung dari kamera perangkat di halaman Foto &amp; Deteksi.</li>
+            <li>Hasil deteksi menampilkan confidence score per kelas penyakit dalam persentase.</li>
+            <li>Riwayat diagnosis dengan filter per penyakit, rentang tanggal, confidence minimal, dan nama file.</li>
+            <li>Feedback pengguna — user dapat menilai kebenaran setiap prediksi.</li>
+            <li>Admin Dashboard — statistik global, kelola pengguna, confusion matrix, dan ROC Curve interaktif.</li>
+            <li>Halaman Info Penyakit — deskripsi, gejala, penyebab, dan penanganan per jenis penyakit.</li>
+            <li>Black Box Testing: 31 skenario user + 16 skenario admin — semua berhasil.</li>
+          </ul>
+
+          <p class="project-section-label">Metodologi Pengembangan</p>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="flow-step-num">01</span>
+              <div class="flow-step-content">
+                <h4>Requirement</h4>
+                <p>Analisis kebutuhan fungsional dan non-fungsional. Input format JPG/JPEG/PNG, output 4 kelas penyakit beserta confidence score.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">02</span>
+              <div class="flow-step-content">
+                <h4>Design</h4>
+                <p>Pemodelan UML (Use Case, Activity, Sequence, Class Diagram, ERD) dan wireframe antarmuka pengguna.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">03</span>
+              <div class="flow-step-content">
+                <h4>Coding / Implementation</h4>
+                <p>Django 5.2 dengan arsitektur Class-Based Views. Model dilatih dengan GridSearchCV + Stratified K-Fold 5-fold.</p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <span class="flow-step-num">04</span>
+              <div class="flow-step-content">
+                <h4>Testing</h4>
+                <p>Black Box Testing 47 skenario total. Seluruh fitur berjalan sesuai spesifikasi dengan status Berhasil.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="project-section-label">Dataset &amp; Training</p>
+          <div class="metrics-row">
+            <div class="metric">
+              <span class="metric-val">8,678</span>
+              <span class="metric-label">Total Sampel</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">6,942</span>
+              <span class="metric-label">Data Latih (80%)</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">868</span>
+              <span class="metric-label">Validasi (10%)</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">868</span>
+              <span class="metric-label">Pengujian (10%)</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">12,028</span>
+              <span class="metric-label">Setelah SMOTE</span>
+            </div>
+          </div>
+
+          <p class="project-section-label">Teknologi</p>
+          <div class="tech-stack">
+            <span class="tag amber">Python 3.13</span>
+            <span class="tag amber">Django 5.2</span>
+            <span class="tag amber">scikit-learn</span>
+            <span class="tag amber">OpenCV</span>
+            <span class="tag amber">imbalanced-learn</span>
+            <span class="tag amber">Random Forest</span>
+            <span class="tag amber">BorderlineSMOTE</span>
+            <span class="tag amber">GridSearchCV</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Bootstrap 5</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <span class="section-num">—</span>
+    <h2 class="section-title">Kontak</h2>
+  </div>
+  <p style="color:var(--ink-mid);max-width:480px;margin-bottom:32px;line-height:1.8;">
+    Tertarik berkolaborasi atau ada pertanyaan mengenai proyek-proyek di atas? Jangan ragu untuk menghubungi saya.
+  </p>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:20px 28px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Email</p>
+      <p style="font-size:14px;font-weight:500;color:var(--ink);">kevoctavian@gmail.com</p>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:20px 28px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Universitas</p>
+      <p style="font-size:14px;font-weight:500;color:var(--ink);">Universitas Bunda Mulia — Informatika</p>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:20px 28px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">NIM</p>
+      <p style="font-size:14px;font-weight:500;color:var(--ink);">32220098</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <span class="footer-name">Kevin Octavianus Santoso</span>
+    <span class="footer-sub">Software Developer · ML Engineer · 2026</span>
+  </div>
+  <span class="footer-right">Universitas Bunda Mulia · Informatika</span>
+</footer>
+
+<script>
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
